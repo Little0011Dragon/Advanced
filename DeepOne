@@ -1,0 +1,32 @@
+using System;
+using System.Timers;
+
+class Program
+{
+    static Timer timer;
+
+    static void Main(string[] args)
+    {
+        double currentTemperature = 24.5; //Задаем текущую температуру.
+        double triggerTemperature = 25.0; //Задаем температуру, при достижении которой включается таймер.
+
+        if (currentTemperature >= triggerTemperature)
+        {
+            Console.WriteLine("Temperature reached. Starting timer.");
+            StartTimer();
+        }
+    }
+
+    static void StartTimer()
+    {
+        timer = new Timer(1000); //Создаем таймер с интервалом в 1 секунду.
+
+        timer.Elapsed += TimerElapsed; //Добавляем обработчик события, который вызывается по истечении времени таймера.
+        timer.Start(); //Запускаем таймер.
+    }
+
+    static void TimerElapsed(object sender, ElapsedEventArgs e)
+    {
+        Console.WriteLine("Timer tick at {0}", e.SignalTime);
+    }
+}
